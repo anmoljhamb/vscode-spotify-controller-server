@@ -6,6 +6,7 @@
     "author": "Anmol Jhamb <talktoanmol@outlook.com>",
     "license": "MIT",
     "dependencies": {
+        "@vercel/analytics": "^1.0.1",
         "cors": "^2.8.5",
         "express": "^4.18.2",
         "http-errors": "^2.0.0",

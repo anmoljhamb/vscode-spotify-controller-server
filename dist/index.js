@@ -9,6 +9,8 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const cors_1 = __importDefault(require("cors"));
 const http_errors_1 = __importDefault(require("http-errors"));
 const express_1 = __importDefault(require("express"));
+const analytics_1 = require("@vercel/analytics");
+(0, analytics_1.inject)();
 dotenv_1.default.config({ path: path_1.default.join(__dirname, "..", ".env") });
 const PORT = process.env.PORT || 8080;
 const app = (0, express_1.default)();
