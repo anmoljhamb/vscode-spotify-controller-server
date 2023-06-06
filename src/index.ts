@@ -6,6 +6,7 @@ import createHttpErrors from "http-errors";
 import express, { NextFunction, Request, Response } from "express";
 import { inject } from "@vercel/analytics";
 import { spotifyApi } from "./utils";
+import { authRouter } from "./routes";
 
 dotenv.config({ path: path.join(__dirname, "..", ".env") });
 
@@ -19,24 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "public")));
 
-app.use("/auth/login", (req, res, next) => {
-    const scopes = [
-        "user-read-private",
-        "user-read-email",
-        "user-read-playback-state",
-        "user-read-currently-playing",
-        "user-modify-playback-state",
-        "app-remote-control",
-        "streaming",
-    ];
-
-    const authUrl = spotifyApi.createAuthorizeURL(
-        scopes,
-        "some-state-of-my-choice"
-    );
-
-    return res.redirect(authUrl);
-});
+app.use("/auth", authRouter);
 
 // 404 middleware
 app.use((req, res, next) => {
