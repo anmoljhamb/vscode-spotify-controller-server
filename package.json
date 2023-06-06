@@ -34,7 +34,6 @@
         "vercel": "cp vercel.json ./dist/vercel.json"
     },
     "pre-commit": [
-        "build",
         "vercel"
     ]
 }
