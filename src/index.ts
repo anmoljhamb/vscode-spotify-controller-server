@@ -19,6 +19,7 @@ app.use(express.json());
 
 // Routes
 app.get("/", (req, res, next) => {
+    inject();
     res.status(200).json({ message: "Working" });
 });
 
@@ -37,7 +38,6 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     return res.sendStatus(500);
 });
 
-inject();
 app.listen(PORT, () => {
     console.log(`Listening on the url *:${PORT}`);
 });

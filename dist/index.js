@@ -20,6 +20,7 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
 // Routes
 app.get("/", (req, res, next) => {
+    (0, analytics_1.inject)();
     res.status(200).json({ message: "Working" });
 });
 app.use((req, res, next) => {
@@ -31,7 +32,6 @@ app.use((err, req, res, next) => {
     }
     return res.sendStatus(500);
 });
-(0, analytics_1.inject)();
 app.listen(PORT, () => {
     console.log(`Listening on the url *:${PORT}`);
 });
