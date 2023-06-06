@@ -16,12 +16,7 @@ app.use(morgan("dev"));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-// Routes
-app.get("/", (req, res, next) => {
-    inject();
-    res.status(200).json({ message: "Working" });
-});
+app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.use((req, res, next) => {
     return next(
