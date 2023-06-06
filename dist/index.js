@@ -9,7 +9,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const cors_1 = __importDefault(require("cors"));
 const http_errors_1 = __importDefault(require("http-errors"));
 const express_1 = __importDefault(require("express"));
-const utils_1 = require("./utils");
+const routes_1 = require("./routes");
 dotenv_1.default.config({ path: path_1.default.join(__dirname, "..", ".env") });
 const PORT = process.env.PORT || 8080;
 const app = (0, express_1.default)();
@@ -19,19 +19,7 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
 app.use(express_1.default.static(path_1.default.join(__dirname, "..", "public")));
-app.use("/auth/login", (req, res, next) => {
-    const scopes = [
-        "user-read-private",
-        "user-read-email",
-        "user-read-playback-state",
-        "user-read-currently-playing",
-        "user-modify-playback-state",
-        "app-remote-control",
-        "streaming",
-    ];
-    const authUrl = utils_1.spotifyApi.createAuthorizeURL(scopes, "some-state-of-my-choice");
-    return res.redirect(authUrl);
-});
+app.use("/auth", routes_1.authRouter);
 // 404 middleware
 app.use((req, res, next) => {
     return next(new http_errors_1.default.NotFound(`The requested url ${req.url} was not found.`));
