@@ -10,7 +10,7 @@ The server provides the necessary endpoints for the extension to obtain and refr
 
 The server exposes the following routes:
 
--   `/auth/grant`: This route is used by the extension to exchange the authorization code obtained after a successful login for an access token and refresh token. The authorization code is sent in the request query parameters, and upon successful authentication, the server responds with the access token and refresh token.
+-   `/auth/grant`: This route is used by the extension to exchange the authorization code obtained after a successful login for an access token and refresh token. The authorization code should be sent as a GET parameter in the request URL (`/auth/grant?code=<authorization_code>`). Upon successful authentication, the server responds with the access token and refresh token.
 
 -   `/auth/refreshToken`: This route is a POST method used to refresh the access token. The client should provide the refresh token in the request body, and the server responds with the refreshed access token.
 
